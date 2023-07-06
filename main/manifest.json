@@ -1,20 +1,19 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Auto Refresh Extension",
+  "description": "Automatically refreshes the tab randomly or at specified intervals.",
   "version": "1.0",
-  "description": "Automatically refreshes the tab at specified intervals.",
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "index.html",
     "default_icon": {
       "16": "icons/16.png",
+      "32": "icons/32.png",
       "48": "icons/48.png",
       "128": "icons/128.png"
     }
   },
-  "permissions": ["activeTab", "storage"],
-  "web_accessible_resources": ["index.html", "static/js/*", "static/css/*"]
+  "permissions": ["activeTab", "storage"]
 }
