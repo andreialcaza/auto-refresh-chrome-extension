@@ -1,14 +1,15 @@
 let refreshIntervals = {};
 
-chrome.runtime.onMessage.addListener((message, sender) => {
-  if (message === "startRefreshRandomly") {
-    const { tabId, refreshFrom, refreshTo } = sender;
+chrome.runtime.onMessage.addListener((message) => {
+  const { action } = message;
+  if (action === "startRefreshRandomly") {
+    const { tabId, refreshFrom, refreshTo } = message;
     startRefreshRandomly(tabId, refreshFrom, refreshTo);
-  } else if (message === "startRefresh") {
-    const { tabId, intervalValue } = sender;
+  } else if (action === "startRefresh") {
+    const { tabId, intervalValue } = message;
     startRefresh(tabId, intervalValue);
-  } else if (message === "stopRefresh") {
-    const { tabId } = sender;
+  } else if (action === "stopRefresh") {
+    const { tabId } = message;
     stopRefresh(tabId);
   }
 });
@@ -18,18 +19,18 @@ function startRefreshRandomly(tabId, refreshFrom, refreshTo) {
     let count = randomNumber(refreshFrom, refreshTo);
     refreshIntervals[tabId] = setInterval(() => {
       if (count > 0) {
-        chrome.browserAction.setBadgeText({
+        chrome.action.setBadgeText({
           text: count.toString(),
           tabId: tabId,
         });
-        chrome.browserAction.setBadgeBackgroundColor({
+        chrome.action.setBadgeBackgroundColor({
           color: "#047857",
           tabId: tabId,
         });
         count--;
       } else {
         chrome.tabs.reload(tabId, { bypassCache: true });
-        chrome.browserAction.setBadgeText({ text: "", tabId: tabId });
+        chrome.action.setBadgeText({ text: "", tabId: tabId });
         count = randomNumber(refreshFrom, refreshTo);
       }
     }, 1000);
@@ -41,18 +42,18 @@ function startRefresh(tabId, intervalValue) {
     let count = intervalValue;
     refreshIntervals[tabId] = setInterval(() => {
       if (count > 0) {
-        chrome.browserAction.setBadgeText({
+        chrome.action.setBadgeText({
           text: count.toString(),
           tabId: tabId,
         });
-        chrome.browserAction.setBadgeBackgroundColor({
+        chrome.action.setBadgeBackgroundColor({
           color: "#047857",
           tabId: tabId,
         });
         count--;
       } else {
         chrome.tabs.reload(tabId, { bypassCache: true });
-        chrome.browserAction.setBadgeText({ text: "", tabId: tabId });
+        chrome.action.setBadgeText({ text: "", tabId: tabId });
         count = intervalValue;
       }
     }, 1000);
@@ -61,7 +62,7 @@ function startRefresh(tabId, intervalValue) {
 
 function stopRefresh(tabId) {
   if (refreshIntervals[tabId]) {
-    chrome.browserAction.setBadgeText({ text: "", tabId: tabId });
+    chrome.action.setBadgeText({ text: "", tabId: tabId });
     clearInterval(refreshIntervals[tabId]);
     delete refreshIntervals[tabId];
   }
