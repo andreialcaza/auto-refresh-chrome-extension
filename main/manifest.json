@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Auto Refresh Extension",
+  "version": "1.0",
+  "description": "Automatically refreshes the tab at specified intervals.",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "permissions": ["activeTab", "storage"],
+  "web_accessible_resources": ["index.html", "static/js/*", "static/css/*"]
+}
