@@ -7,6 +7,7 @@ const SwitchButton = ({ currentTabId, startAutoRefresh, stopAutoRefresh }) => {
         className="sr-only peer"
         onChange={(event) => {
           if (event.target.checked) {
+            stopAutoRefresh();
             startAutoRefresh();
           } else {
             stopAutoRefresh();
