@@ -82,9 +82,11 @@ const App = () => {
           if (el.tabId === tabId && el.system === "fixed") {
             setCurrentRandomTabId(false);
             setCurrentFixTabId(true);
+            setToggleUI(false);
           } else if (el.tabId === tabId && el.system === "random") {
             setCurrentRandomTabId(true);
             setCurrentFixTabId(false);
+            setToggleUI(true);
           } else {
             setCurrentRandomTabId(false);
             setCurrentFixTabId(false);

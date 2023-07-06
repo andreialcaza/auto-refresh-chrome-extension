@@ -15,8 +15,13 @@ const Index = ({
       <InputField
         intervalValue={refreshFrom}
         setIntervalValue={setRefreshFrom}
+        currentTab={currentRandomTabId}
       />
-      <InputField intervalValue={refreshTo} setIntervalValue={setRefreshTo} />
+      <InputField
+        intervalValue={refreshTo}
+        setIntervalValue={setRefreshTo}
+        currentTab={currentRandomTabId}
+      />
       <SwitchButton
         currentTabId={currentRandomTabId}
         startAutoRefresh={startRandomAutoRefresh}

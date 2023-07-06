@@ -15,6 +15,7 @@ const Index = ({
         <InputField
           intervalValue={intervalValue}
           setIntervalValue={setIntervalValue}
+          currentTab={currentFixTabId}
         />
         <SwitchButton
           currentTabId={currentFixTabId}
