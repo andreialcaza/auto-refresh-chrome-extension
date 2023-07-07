@@ -28,6 +28,8 @@ const App = () => {
           const newObj = {
             tabId,
             system: "random",
+            refreshFrom,
+            refreshTo,
           };
           activeTabs.push(newObj);
           chrome.storage.local.set({ activeTabs });
@@ -51,6 +53,7 @@ const App = () => {
           const newObj = {
             tabId,
             system: "fixed",
+            intervalValue,
           };
           activeTabs.push(newObj);
           chrome.storage.local.set({ activeTabs });
@@ -82,10 +85,13 @@ const App = () => {
           if (el.tabId === tabId && el.system === "fixed") {
             setCurrentRandomTabId(false);
             setCurrentFixTabId(true);
+            setIntervalValue(el.intervalValue);
             setToggleUI(false);
           } else if (el.tabId === tabId && el.system === "random") {
             setCurrentRandomTabId(true);
             setCurrentFixTabId(false);
+            setRefreshFrom(el.refreshFrom);
+            setRefreshTo(el.refreshTo);
             setToggleUI(true);
           } else {
             setCurrentRandomTabId(false);
