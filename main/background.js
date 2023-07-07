@@ -29,7 +29,7 @@ function startRefreshRandomly(tabId, refreshFrom, refreshTo) {
         });
         count--;
       } else {
-        chrome.tabs.reload(tabId, { bypassCache: true });
+        chrome.tabs.reload(tabId, { bypassCache: false });
         chrome.action.setBadgeText({ text: "", tabId: tabId });
         count = randomNumber(refreshFrom, refreshTo);
       }
@@ -52,7 +52,7 @@ function startRefresh(tabId, intervalValue) {
         });
         count--;
       } else {
-        chrome.tabs.reload(tabId, { bypassCache: true });
+        chrome.tabs.reload(tabId, { bypassCache: false });
         chrome.action.setBadgeText({ text: "", tabId: tabId });
         count = intervalValue;
       }

@@ -16,6 +16,7 @@ const Index = ({
           intervalValue={intervalValue}
           setIntervalValue={setIntervalValue}
           currentTab={currentFixTabId}
+          placeholder="Intervals"
         />
         <SwitchButton
           currentTabId={currentFixTabId}
