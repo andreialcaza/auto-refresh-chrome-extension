@@ -6,4 +6,10 @@
   body {
     font-family: "Poppins", sans-serif;
   }
+  .scale-down-button {
+    transition: transform 0.2s;
+  }
+  .scale-down-button:active {
+    transform: scale(0.80);
+  }
 }

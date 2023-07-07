@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import Random from "./components/random";
 import Fixed from "./components/fixed";
+import Logo from "./assets/logo.png";
+import Setting from "./assets/setting.svg";
 
 const App = () => {
   const [toggleUI, setToggleUI] = useState(true);
@@ -103,8 +105,18 @@ const App = () => {
   }, []);
 
   return (
-    <div className="p-5 w-72">
-      <p className="text-lg font-semibold">Refresh within seconds:</p>
+    <div className="p-4 w-72">
+      <div className="flex justify-between items-center border-b mb-5 pb-1">
+        <div className="flex justify-between items-center gap-2">
+          <img src={Logo} className="w-5" />
+          <p className="text-lg font-medium">Auto Refresh Lite</p>
+        </div>
+        <img
+          src={Setting}
+          className="w-5 cursor-pointer scale-down-button"
+          onClick={() => setToggleUI(!toggleUI)}
+        />
+      </div>
       {toggleUI ? (
         <Random
           currentRandomTabId={currentRandomTabId}
@@ -124,12 +136,6 @@ const App = () => {
           stopFixAutoRefresh={stopAutoRefresh}
         />
       )}
-      <p
-        className="text-right cursor-pointer font-light underline mt-5"
-        onClick={() => setToggleUI(!toggleUI)}
-      >
-        {toggleUI ? "Fixed" : "Random"}
-      </p>
     </div>
   );
 };

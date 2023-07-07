@@ -3,7 +3,7 @@ const InputField = ({ intervalValue, setIntervalValue, currentTab }) => {
     <label>
       <input
         type="number"
-        className={`outline-0 border p-1 w-full ${
+        className={`outline-0 border p-1 w-full rounded ${
           currentTab ? "border-green-600" : "border-gray-600"
         }`}
         value={intervalValue}
