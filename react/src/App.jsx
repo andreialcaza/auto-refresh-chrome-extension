@@ -10,8 +10,8 @@ const App = () => {
   const [toggleUI, setToggleUI] = useState(true);
 
   const [currentRandomTabId, setCurrentRandomTabId] = useState(false);
-  const [refreshFrom, setRefreshFrom] = useState(360);
-  const [refreshTo, setRefreshTo] = useState(540);
+  const [refreshFrom, setRefreshFrom] = useState(300);
+  const [refreshTo, setRefreshTo] = useState(900);
 
   const [currentFixTabId, setCurrentFixTabId] = useState(false);
   const [intervalValue, setIntervalValue] = useState(600);
