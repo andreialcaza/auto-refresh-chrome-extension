@@ -11,25 +11,29 @@ const Index = ({
   stopAutoRefresh,
 }) => {
   return (
-    <div className="flex items-center gap-2 justify-between">
+    <form className="flex items-center gap-2 justify-between">
       <InputField
         intervalValue={refreshFrom}
         setIntervalValue={setRefreshFrom}
         currentTab={currentRandomTabId}
-        placeholder="From"
+        placeholder="Min"
+        refreshFrom={refreshFrom}
+        refreshTo={refreshTo}
       />
       <InputField
         intervalValue={refreshTo}
         setIntervalValue={setRefreshTo}
         currentTab={currentRandomTabId}
-        placeholder="To"
+        placeholder="Max"
+        refreshFrom={refreshFrom}
+        refreshTo={refreshTo}
       />
       <SwitchButton
         currentTabId={currentRandomTabId}
         startAutoRefresh={startRandomAutoRefresh}
         stopAutoRefresh={stopAutoRefresh}
       />
-    </div>
+    </form>
   );
 };
 

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Auto Refresh Extension",
+  "name": "Easy Auto Refresh Extension",
   "description": "Automatically refreshes the tab randomly or at specified intervals.",
   "version": "1.0",
   "background": {

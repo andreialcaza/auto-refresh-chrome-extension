@@ -4,9 +4,11 @@ chrome.runtime.onMessage.addListener((message) => {
   const { action } = message;
   if (action === "startRefreshRandomly") {
     const { tabId, refreshFrom, refreshTo } = message;
+    reloadHandler(tabId);
     startRefreshRandomly(tabId, refreshFrom, refreshTo);
   } else if (action === "startRefresh") {
     const { tabId, intervalValue } = message;
+    reloadHandler(tabId);
     startRefresh(tabId, intervalValue);
   } else if (action === "stopRefresh") {
     const { tabId } = message;
@@ -19,18 +21,10 @@ function startRefreshRandomly(tabId, refreshFrom, refreshTo) {
     let count = randomNumber(refreshFrom, refreshTo);
     refreshIntervals[tabId] = setInterval(() => {
       if (count > 0) {
-        chrome.action.setBadgeText({
-          text: count.toString(),
-          tabId: tabId,
-        });
-        chrome.action.setBadgeBackgroundColor({
-          color: "#047857",
-          tabId: tabId,
-        });
+        badgeHander(count, tabId);
         count--;
       } else {
-        chrome.tabs.reload(tabId, { bypassCache: false });
-        chrome.action.setBadgeText({ text: "", tabId: tabId });
+        reloadHandler(tabId);
         count = randomNumber(refreshFrom, refreshTo);
       }
     }, 1000);
@@ -42,18 +36,10 @@ function startRefresh(tabId, intervalValue) {
     let count = intervalValue;
     refreshIntervals[tabId] = setInterval(() => {
       if (count > 0) {
-        chrome.action.setBadgeText({
-          text: count.toString(),
-          tabId: tabId,
-        });
-        chrome.action.setBadgeBackgroundColor({
-          color: "#047857",
-          tabId: tabId,
-        });
+        badgeHander(count, tabId);
         count--;
       } else {
-        chrome.tabs.reload(tabId, { bypassCache: false });
-        chrome.action.setBadgeText({ text: "", tabId: tabId });
+        reloadHandler(tabId);
         count = intervalValue;
       }
     }, 1000);
@@ -66,6 +52,23 @@ function stopRefresh(tabId) {
     clearInterval(refreshIntervals[tabId]);
     delete refreshIntervals[tabId];
   }
+}
+
+// helpers
+function badgeHander(count, tabId) {
+  chrome.action.setBadgeText({
+    text: count.toString(),
+    tabId: tabId,
+  });
+  chrome.action.setBadgeBackgroundColor({
+    color: "#047857",
+    tabId: tabId,
+  });
+}
+
+function reloadHandler(tabId) {
+  chrome.tabs.reload(tabId, { bypassCache: false });
+  chrome.action.setBadgeText({ text: "", tabId: tabId });
 }
 
 function randomNumber(min, max) {

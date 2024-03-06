@@ -2,6 +2,8 @@ import QuickItems from "./QuickItems";
 import InputField from "../InputField";
 import SwitchButton from "../SwitchButton";
 
+const quickItems = [5, 10, 15, 20, 25, 30, 35, 40];
+
 const Index = ({
   currentFixTabId,
   intervalValue,
@@ -11,7 +13,7 @@ const Index = ({
 }) => {
   return (
     <div>
-      <div className="flex items-center gap-2 justify-between">
+      <form className="flex items-center gap-2 justify-between">
         <InputField
           intervalValue={intervalValue}
           setIntervalValue={setIntervalValue}
@@ -23,18 +25,17 @@ const Index = ({
           startAutoRefresh={startFixAutoRefresh}
           stopAutoRefresh={stopFixAutoRefresh}
         />
-      </div>
+      </form>
       <div className="mt-5">
         <p className="font-normal">Quick start:</p>
         <div className="flex flex-wrap justify-between gap-1 mt-1">
-          <QuickItems setIntervalValue={setIntervalValue} min={5} />
-          <QuickItems setIntervalValue={setIntervalValue} min={10} />
-          <QuickItems setIntervalValue={setIntervalValue} min={15} />
-          <QuickItems setIntervalValue={setIntervalValue} min={20} />
-          <QuickItems setIntervalValue={setIntervalValue} min={25} />
-          <QuickItems setIntervalValue={setIntervalValue} min={30} />
-          <QuickItems setIntervalValue={setIntervalValue} min={35} />
-          <QuickItems setIntervalValue={setIntervalValue} min={35} />
+          {quickItems.map((item) => (
+            <QuickItems
+              key={item}
+              setIntervalValue={setIntervalValue}
+              min={item}
+            />
+          ))}
         </div>
       </div>
     </div>
